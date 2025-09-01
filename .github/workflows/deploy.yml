@@ -24,8 +24,14 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
+          # Ensure .nojekyll file is included in the build
+          path-to-static: dist
         env:
           PUBLIC_SITE_URL: 'https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'
+      
+      # Create .nojekyll file
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
 
   deploy:
     needs: build
