@@ -1,16 +1,30 @@
 ---
 import '../styles/globals.css';
+import SEO from '../components/organisms/SEO.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	slug: string;
+	featuredImage?: string;
+}
+
+const { 
+	title = "Astro Basics",
+	description = "A basic Astro site",
+	slug = Astro.url.pathname,
+	featuredImage
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
+	<SEO 
+		title={title}
+		description={description}
+		slug={slug}
+		featuredImage={featuredImage}
+	/>
 	<body>
 		<slot />
 	</body>

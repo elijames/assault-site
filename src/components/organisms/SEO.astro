@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  featuredImage?: string;
+}
+
+const { title, description, slug, featuredImage } = Astro.props;
+
+// Construct absolute URLs
+const canonicalURL = new URL(slug, Astro.site);
+const imageURL = featuredImage ? new URL(featuredImage, Astro.site) : undefined;
+
+// Ensure title doesn't exceed Twitter's limit
+const twitterTitle = title.length > 70 ? `${title.substring(0, 67)}...` : title;
+
+// Ensure description doesn't exceed common meta description length
+const metaDescription = description.length > 160 ? `${description.substring(0, 157)}...` : description;
+---
+
+<head>
+    <!-- Essential Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={metaDescription} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Title -->
+    <title>{title}</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    {featuredImage && <meta property="og:image" content={imageURL} />}
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content={featuredImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    {featuredImage && <meta name="twitter:image" content={imageURL} />}
+
+    <!-- Additional head content can be passed through via slots -->
+    <slot />
+</head>

@@ -1,1 +1,34 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply text-neutral-900 bg-white;
+  }
+  
+  /* Default dark mode */
+  @media (prefers-color-scheme: dark) {
+    html {
+      @apply text-neutral-50 bg-neutral-900;
+    }
+  }
+}
+
+@layer components {
+  /* Add your custom component classes here */
+  .btn-primary {
+    @apply bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-600 text-white px-4 py-2 rounded-lg hover:bg-secondary-700 transition-colors;
+  }
+}
+
+@layer utilities {
+  /* Add your custom utilities here */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
