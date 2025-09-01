@@ -9,8 +9,8 @@ interface Props {
 const { title, description, slug, featuredImage } = Astro.props;
 
 // Construct absolute URLs
-const canonicalURL = new URL(slug, Astro.site);
-const imageURL = featuredImage ? new URL(featuredImage, Astro.site) : undefined;
+const canonicalURL = Astro.site ? new URL(slug, Astro.site) : `/${slug.replace(/^\//, '')}`;
+const imageURL = featuredImage ? (Astro.site ? new URL(featuredImage, Astro.site) : featuredImage) : undefined;
 
 // Ensure title doesn't exceed Twitter's limit
 const twitterTitle = title.length > 70 ? `${title.substring(0, 67)}...` : title;

@@ -1,11 +1,9 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
-
-import tailwindcss from '@tailwindcss/vite';
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  }
+  site: process.env.PUBLIC_SITE_URL || 'http://localhost:4321',
+  base: process.env.PUBLIC_SITE_URL ? new URL(process.env.PUBLIC_SITE_URL).pathname : '/',
+  integrations: [tailwind()]
 });
