@@ -1,14 +1,22 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { generateSrcset } from '../components/utils/imageSrcset';
+import logo from '../assets/images/assault-logo.png';
 
 // SEO metadata for the homepage
 const seoData = {
-	title: "Assault Media Marketing",
+	title: "Assault Media Marketing - Typography",
 	description: "Full-service marketing agency specializing in developing and evolving the whole experience to grow your business.",
 	slug: "/",
-	featuredImage: "/featured-image.jpg"  // Optional: path to image for social media cards
+	featuredImage: "/featured-image.jpg"
 };
+
+const { widths, sizes } = generateSrcset({
+  src: logo,
+  preset: 'logo'
+});
+
 ---
 
 <Layout 
@@ -17,5 +25,79 @@ const seoData = {
 	slug={seoData.slug}
 	featuredImage={seoData.featuredImage}
 >
-	<Welcome />
+	<main class="container mx-auto px-4 py-8 space-y-12">
+		<section class="space-y-8">
+			<Image src={logo} alt="Assault Media Marketing Logo" widths={widths} sizes={sizes} />
+		</section>
+		<!-- Real-world Examples -->
+		<section class="space-y-8">
+			<h2 class="font-primary font-bold text-3xl mb-8">Typography Examples</h2>
+			
+			<!-- Typography System Examples -->
+			<div class="space-y-8">
+				<!-- Headlines -->
+				<div class="space-y-4">
+					<h1>Main Headline in Montserrat Bold Uppercase (2rem)</h1>
+					<h2>Section Title in Jost Bold (1.5rem)</h2>
+					<h3>Subsection Heading in Jost Bold (1.25rem)</h3>
+					<h4>Minor Heading in Jost Bold (1rem)</h4>
+					<h5>Small Heading in Jost Bold (.75rem)</h5>
+					<h6>Smallest Heading in Jost Bold (.5rem)</h6>
+				</div>
+
+				<!-- Body Text Examples -->
+				<div class="space-y-8">
+					<!-- Paragraph Text -->
+					<div class="space-y-4">
+						<p>
+							This is a standard paragraph using Jost Regular. Our typography system uses Jost 
+							for all body text elements to maintain consistency and readability across the site. 
+							The quick brown fox jumps over the lazy dog.
+						</p>
+						<p class="italic">
+							This is an emphasized paragraph in italic. Notice how the Jost font maintains 
+							its clarity and elegance in italic form.
+						</p>
+					</div>
+
+					<!-- Lists -->
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<div>
+							<h4 class="mb-2">Unordered List:</h4>
+							<ul class="list-disc list-inside space-y-1">
+								<li>First list item in Jost Regular</li>
+								<li>Second list item with <span class="italic">italic emphasis</span></li>
+								<li>Third list item example</li>
+							</ul>
+						</div>
+						<div>
+							<h4 class="mb-2">Ordered List:</h4>
+							<ol class="list-decimal list-inside space-y-1">
+								<li>First numbered item in Jost Regular</li>
+								<li>Second numbered item with <span class="italic">italic emphasis</span></li>
+								<li>Third numbered item example</li>
+							</ol>
+						</div>
+					</div>
+
+					<!-- Blockquote -->
+					<blockquote class="border-l-4 border-primary-500 pl-4 italic">
+						This is a blockquote using Jost Regular in italic style. It demonstrates how our 
+						typography system handles quoted content with elegance and clarity.
+					</blockquote>
+
+					<!-- Interactive Elements -->
+					<div class="space-y-2">
+						<label for="example-input">Form Label in Jost Regular:</label>
+						<input 
+							type="text" 
+							id="example-input"
+							placeholder="Input text uses Jost Regular"
+							class="block w-full border rounded px-3 py-2"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
