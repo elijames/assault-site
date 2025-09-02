@@ -49,7 +49,7 @@
 
   /* Typography defaults */
   h1 {
-    @apply font-primary font-semibold uppercase text-[2rem];
+    @apply font-primary font-bold uppercase text-[2rem];
   }
 
   h2 {
