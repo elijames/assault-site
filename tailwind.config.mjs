@@ -17,6 +17,7 @@ export default {
         // Secondary colors
         secondary: '#CBA659',
         gray: '#58585A',
+        gray70: '#58585ab3',
         white: '#FFFFFF',
         // Neutral colors
         neutral: {

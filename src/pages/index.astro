@@ -26,8 +26,10 @@ const { widths, sizes } = generateSrcset({
 	featuredImage={seoData.featuredImage}
 >
 	<main class="container mx-auto px-4 py-8 space-y-12">
-		<section class="space-y-8">
-			<Image src={logo} alt="Assault Media Marketing Logo" widths={widths} sizes={sizes} />
+		<section class="space-y-8 space-x-2 flex flex-row justify-center items-center">
+			<div class="w-1/2">
+				<Image src={logo} alt="Assault Media Marketing Logo" widths={widths} sizes={sizes} />
+			</div>
 		</section>
 		<!-- Real-world Examples -->
 		<section class="space-y-8">

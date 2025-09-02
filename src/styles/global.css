@@ -43,7 +43,7 @@
   /* Default dark mode */
   @media (prefers-color-scheme: dark) {
     html {
-      @apply text-white bg-gray;
+      @apply text-white bg-gray70;
     }
   }
 

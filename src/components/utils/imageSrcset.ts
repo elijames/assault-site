@@ -7,7 +7,9 @@ const breakpoints = {
   md: 768,
   lg: 1024,
   xl: 1280,
-  '2xl': 1536
+  '2xl': 1536,
+  '3xl': 2000,
+  '4xl': 2560  // Common 2K/1440p display width
 };
 
 // Preset size configurations
@@ -19,7 +21,9 @@ const sizePresets = {
     md: 100,
     lg: 100,
     xl: 100,
-    '2xl': 100
+    '2xl': 100,
+    '3xl': 100,
+    '4xl': 100
   },
   // Full width on mobile, half width on larger screens
   half: {
@@ -28,7 +32,9 @@ const sizePresets = {
     md: 50,
     lg: 50,
     xl: 50,
-    '2xl': 50
+    '2xl': 50,
+    '3xl': 50,
+    '4xl': 50
   },
   // Full width on mobile, third width on larger screens
   third: {
@@ -37,7 +43,9 @@ const sizePresets = {
     md: 50,
     lg: 33,
     xl: 33,
-    '2xl': 33
+    '2xl': 33,
+    '3xl': 33,
+    '4xl': 33
   },
   // Small fixed sizes
   logo: {
@@ -46,7 +54,9 @@ const sizePresets = {
     md: 200,
     lg: 225,
     xl: 250,
-    '2xl': 300
+    '2xl': 300,
+    '3xl': 350,
+    '4xl': 400
   },
   // Hero image sizes
   hero: {
@@ -55,7 +65,9 @@ const sizePresets = {
     md: 100,
     lg: 90,
     xl: 80,
-    '2xl': 70
+    '2xl': 70,
+    '3xl': 60,
+    '4xl': 50
   },
   // Content image sizes
   content: {
@@ -64,7 +76,9 @@ const sizePresets = {
     md: 80,
     lg: 70,
     xl: 60,
-    '2xl': 50
+    '2xl': 50,
+    '3xl': 40,
+    '4xl': 35
   }
 } as const;
 
