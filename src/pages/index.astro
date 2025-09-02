@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { generateSrcset } from '../components/utils/imageSrcset';
 import logo from '../assets/images/assault-logo.png';
+import FlipbookAnimation from '../components/organisms/FlipbookAnimation.astro';
 
 // SEO metadata for the homepage
 const seoData = {
@@ -26,10 +27,24 @@ const { widths, sizes } = generateSrcset({
 	featuredImage={seoData.featuredImage}
 >
 	<main class="container mx-auto px-4 py-8 space-y-12">
-		<section class="space-y-8 space-x-2 flex flex-row justify-center items-center">
+		<section class="space-y-8 flex flex-col justify-center items-center">
+			<div class="w-full max-w-4xl h-[400px]">
+				<FlipbookAnimation duration={1} />
+			</div>
 			<div class="w-1/2">
 				<Image src={logo} alt="Assault Media Marketing Logo" widths={widths} sizes={sizes} />
 			</div>
+		</section>
+		<h1>About us</h1>
+		<section id="approach">
+			<h2>Our Approach</h2>
+
+		</section>
+		<section id="team">
+			<h2>Our Team</h2>
+		</section>
+		<section id="work-with-us">
+			<h2>Work with us</h2>
 		</section>
 		<!-- Real-world Examples -->
 		<section class="space-y-8">

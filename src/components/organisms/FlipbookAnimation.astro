@@ -1,0 +1,103 @@
+---
+// Import all frames
+import frame1_1 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-1.png';
+import frame1_2 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-2.png';
+import frame1_3 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-3.png';
+import frame1_4 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-4.png';
+import frame1_5 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-5.png';
+import frame1_6 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-6.png';
+import frame1_7 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-7.png';
+import frame1_8 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-8.png';
+import frame1_9 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-9.png';
+import frame1_10 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-10.png';
+import frame1_10_1 from '../../assets/images/assault-animation/ASSAULT_INTRO_1-10-1.png';
+
+import frame2_2 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-2.png';
+import frame2_3 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-3.png';
+import frame2_4 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-4.png';
+import frame2_5 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-5.png';
+import frame2_6 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-6.png';
+import frame2_7 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-7.png';
+import frame2_8 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-8.png';
+import frame2_9 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-9.png';
+import frame2_10 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-10.png';
+import frame2_11 from '../../assets/images/assault-animation/ASSAULT_INTRO_2-11.png';
+
+import frame3_1 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-1.png';
+import frame3_2 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-2.png';
+import frame3_3 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-3.png';
+import frame3_4 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-4.png';
+import frame3_5 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-5.png';
+import frame3_6 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-6.png';
+import frame3_7 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-7.png';
+import frame3_8 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-8.png';
+import frame3_9 from '../../assets/images/assault-animation/ASSAULT_INTRO_3-9.png';
+
+import { Image } from 'astro:assets';
+
+interface Props {
+  class?: string;
+  duration?: number; // Animation duration in seconds
+}
+
+const { class: className = '', duration = 1.5 } = Astro.props;
+
+// Array of all frames in sequence
+const frames = [
+  frame1_1, frame1_2, frame1_3, frame1_4, frame1_5, frame1_6, frame1_7, frame1_8, frame1_9, frame1_10, frame1_10_1,
+  frame2_2, frame2_3, frame2_4, frame2_5, frame2_6, frame2_7, frame2_8, frame2_9, frame2_10, frame2_11,
+  frame3_1, frame3_2, frame3_3, frame3_4, frame3_5, frame3_6, frame3_7, frame3_8, frame3_9
+];
+
+const lastFrameIndex = frames.length - 1;
+---
+
+<style define:vars={{ duration }}>
+  .flipbook-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flipbook-frame {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  .flipbook-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @keyframes flipbook {
+    0%, 100% { opacity: 0; }
+    3.33% { opacity: 1; }
+    10% { opacity: 0; }
+  }
+
+  @keyframes lastFrame {
+    0%, 95% { opacity: 0; }
+    95.1%, 100% { opacity: 1; }
+  }
+</style>
+
+<div class:list={['flipbook-container', className]}>
+  {frames.map((frame, i) => (
+    <div 
+      class="flipbook-frame"
+      style={i === lastFrameIndex 
+        ? `animation: lastFrame ${duration}s steps(1) forwards;` 
+        : `animation: flipbook ${duration}s steps(1) forwards; animation-delay: ${(i * duration) / frames.length}s;`}
+    >
+      <Image 
+        src={frame} 
+        alt={`Animation frame ${i + 1}`}
+      />
+    </div>
+  ))}
+</div>
