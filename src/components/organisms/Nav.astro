@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import { generateSrcset } from '../utils/imageSrcset';
+import logo from '../../assets/images/assault-logo.png';
+
+const { widths, sizes } = generateSrcset({
+  src: logo,
+  preset: 'logo'
+});
+
+// Client-side script
+const script = `
+	const menuToggle = document.getElementById('menu-toggle');
+	const closeMenuBtn = document.getElementById('close-menu');
+	const mobileMenu = document.getElementById('mobile-menu');
+	const menuOverlay = document.getElementById('menu-overlay');
+	const menuContent = mobileMenu?.querySelector('div:last-child');
+	const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+
+	function openMenu() {
+		if (!mobileMenu || !menuOverlay || !menuContent) return;
+		
+		// Make the menu visible first
+		mobileMenu.classList.remove('invisible');
+		
+		// Trigger animations after a small delay to ensure visibility
+		requestAnimationFrame(() => {
+			menuOverlay.classList.add('opacity-50');
+			menuContent.classList.remove('translate-x-full');
+		});
+	}
+
+	function closeMenu() {
+		if (!mobileMenu || !menuOverlay || !menuContent) return;
+		
+		// Start the closing animations
+		menuOverlay.classList.remove('opacity-50');
+		menuContent.classList.add('translate-x-full');
+		
+		// Hide the menu after animations complete
+		setTimeout(() => {
+			mobileMenu.classList.add('invisible');
+		}, 300); // Match this with your transition duration
+	}
+
+	menuToggle?.addEventListener('click', openMenu);
+	closeMenuBtn?.addEventListener('click', closeMenu);
+	menuOverlay?.addEventListener('click', closeMenu);
+
+	// Handle smooth scrolling for all navigation links
+	function handleScroll(e) {
+		e.preventDefault();
+		const targetId = e.currentTarget.getAttribute('href');
+		if (!targetId) return;
+		
+		const targetElement = document.querySelector(targetId);
+		if (!targetElement) return;
+		
+		// Get the height of the sticky nav
+		const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+		
+		// Calculate the target position with offset
+		const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
+		
+		// Smooth scroll to target
+		window.scrollTo({
+			top: targetPosition,
+			behavior: 'smooth'
+		});
+	}
+
+	// Add click handlers to mobile menu links
+	mobileMenuLinks?.forEach(link => {
+		link.addEventListener('click', (e) => {
+			closeMenu();
+			handleScroll(e);
+		});
+	});
+
+	// Add click handlers to desktop menu links
+	document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+		if (!mobileMenuLinks?.includes(link)) {
+			link.addEventListener('click', handleScroll);
+		}
+	});
+`;
+---
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<nav class="container mx-auto px-4 py-1 flex flex-row justify-between items-center">
+	<div class="w-1/2 lg:w-1/6">
+		<Image src={logo} alt="Assault Media Marketing Logo" widths={widths} sizes={sizes} />
+	</div>
+	
+	<!-- Hamburger Menu Button (visible only on mobile) -->
+	<button id="menu-toggle" class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Toggle Menu">
+		<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+		</svg>
+	</button>
+
+	<!-- Desktop Menu -->
+	<div class="hidden lg:block w-5/6">
+		<ul class="flex flex-row justify-start items-center gap-4">
+			<li><a href="#approach" class="hover:text-gray-600 transition-colors">Our Approach</a></li>
+			<li><a href="#team" class="hover:text-gray-600 transition-colors">Our Team</a></li>
+			<li><a href="#work-with-us" class="hover:text-gray-600 transition-colors">Work with us</a></li>
+		</ul>
+	</div>
+
+	<!-- Mobile Menu Overlay -->
+	<div id="mobile-menu" class="fixed inset-0 lg:hidden invisible">
+		<!-- Gray overlay -->
+		<div id="menu-overlay" class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300"></div>
+		
+		<!-- Menu content -->
+		<div class="absolute inset-y-0 right-0 w-64 bg-[#404040] shadow-xl translate-x-full transition-transform duration-300">
+			<div class="p-6">
+				<button id="close-menu" class="absolute top-4 right-4 p-2 text-white hover:bg-gray-600 rounded-lg transition-colors" aria-label="Close Menu">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+					</svg>
+				</button>
+				<ul class="mt-8 space-y-4">
+					<li><a href="#approach" class="block text-white hover:text-gray-300 transition-colors">Our Approach</a></li>
+					<li><a href="#team" class="block text-white hover:text-gray-300 transition-colors">Our Team</a></li>
+					<li><a href="#work-with-us" class="block text-white hover:text-gray-300 transition-colors">Work with us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<script set:html={script} />
