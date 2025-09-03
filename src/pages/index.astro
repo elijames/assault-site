@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import FlipbookAnimation from '../components/organisms/FlipbookAnimation.astro';
 import Nav from '../components/organisms/Nav.astro';
+import { TabSection } from '../components/organisms/TabSection';
 
 // SEO metadata for the homepage
 const seoData = {
@@ -54,9 +55,25 @@ const seoData = {
 			}, 1500); // flipbook duration
 		</script>
 		<h1>About us</h1>
-		<section id="approach">
-			<h2>Our Approach</h2>
-
+		<section id="approach" class="py-12">
+			<h2 class="text-3xl font-bold mb-8">Our Approach</h2>
+			<TabSection client:load tabs={[
+				{
+					title: "Curate the experience",
+					content: "We begin with a deep dive into your business, understanding your goals, challenges, and unique value proposition. Our discovery phase sets the foundation for a successful partnership and ensures our strategy aligns perfectly with your objectives.",
+					image: "/src/assets/images/dino-final.png"
+				},
+				{
+					title: "Engage with your audience",
+					content: "Based on our discoveries, we develop a comprehensive strategy that combines creative excellence with data-driven insights. Our strategic approach ensures every decision moves you closer to your business goals.",
+					image: "/src/assets/images/dino-final.png"
+				},
+				{
+					title: "Grow and evolve",
+					content: "With a solid strategy in place, our team brings your vision to life through expert execution. We maintain clear communication throughout the process, ensuring every deliverable meets our high standards and your expectations.",
+					image: "/src/assets/images/dino-final.png"
+				}
+			]} />
 		</section>
 		<section id="team">
 			<h2>Our Team</h2>
