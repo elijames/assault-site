@@ -9,6 +9,9 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  
+  console.log('Tabs data:', tabs);
+  console.log('Active tab image:', tabs[activeTab]?.image);
 
   const handleTabClick = (index: number) => {
     if (index === activeTab) return;
