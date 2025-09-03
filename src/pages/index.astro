@@ -20,7 +20,7 @@ const seoData = {
 	featuredImage={seoData.featuredImage}
 >
 <Nav />
-	<main class="container mx-auto px-4 py-8 space-y-12">
+	<main id="main-content"class="">
 		<!-- Flipbook Overlay -->
 		<div id="flipbook-overlay" class="fixed inset-0 z-50 bg-white dark:bg-[#404040] flex items-center justify-center">
 			<div class="w-full max-w-4xl h-[400px]">
@@ -54,8 +54,18 @@ const seoData = {
 				}
 			}, 1500); // flipbook duration
 		</script>
+		<section class="relative py-10">
+			<div class="absolute inset-0" style="background-image: url('/src/assets/images/fortunecookies-min.png'); background-size: 400px 400px; background-repeat: repeat; opacity: 0.5; background-position: center;"></div>
+			<div class="container mx-auto px-4 py-8 space-y-12 relative z-10 flex justify-center items-center">
+				<h1>Turn Customers into Fanatics.</h1>
+			</div>
+		</section>
 		<section id="approach" class="pt-0 pb-12">
-			<h2 class="text-3xl font-bold mb-8">Our Approach</h2>
+			<div class="container mx-auto px-4 py-8 space-y-12">
+			<h2 class="text-3xl font-bold mb-8">Stop just marketing to your audience and start building a movement.</h2>
+			<div class="pb-6">
+				<p>We're not in the business of creating another campaign; we're here to ignite a cult following. Forget generic strategies and tired tactics. We blend artistry with data, curating every touchpoint—from the digital to the physical—to forge a unified, undeniable connection with your audience. From the first click on your website to the feeling they get when they visit your space, we craft a journey so compelling that your customers don't just buy what you sell—they live and breathe your brand. This isn't about selling a product; it's about building an empire of fanatics.</p>
+			</div>
 			<TabSection client:load tabs={[
 				{
 					title: "Curate the experience",
@@ -73,10 +83,20 @@ const seoData = {
 					image: "dino-final.png"
 				}
 			]} />
+			</div>
 		</section>
-		<section id="work-with-us" class="pt-0 pb-12">
-			<h2 class="text-3xl font-bold mb-8">Work with us</h2>
-			<p class="text-gray-700">We're always looking for new and exciting projects. If you're interested in working with us, please get in touch.</p>
+		<section id="work-with-us" class="relative py-10">
+			<div class="absolute inset-0" style="background-image: url('/src/assets/images/fortunecookies-min.png'); background-size: 400px 400px; background-repeat: repeat; opacity: 0.5; background-position: top;"></div>
+			<div class="container relative mx-auto px-10 py-8 space-y-12 flex flex-col justify-center">
+				<div class="px-4 lg:px-8 pb-6 flex flex-col justify-center items-center">
+					<h2 class="pb-4">Ready to ignite a cult following and turn your customers into fanatics? </h2>
+					<div class="mt-10">
+						<a href="https://calendly.com/elijameslennox/30min" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 border-2 border-secondary bg-secondary text-white font-medium rounded-lg hover:bg-primary hover:text-white transition-colors duration-300">
+							Let's build something unforgettable.
+						</a>
+					</div>
+				</div>
+			</div>
 		</section>
 	</main>
 </Layout>
