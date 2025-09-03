@@ -6,7 +6,7 @@ import { TabSection } from '../components/organisms/TabSection';
 
 // SEO metadata for the homepage
 const seoData = {
-	title: "Assault Media Marketing - Typography",
+	title: "Assault Media Marketing",
 	description: "Full-service marketing agency specializing in developing and evolving the whole experience to grow your business.",
 	slug: "/",
 	featuredImage: "/featured-image.jpg"
@@ -20,7 +20,7 @@ const seoData = {
 	featuredImage={seoData.featuredImage}
 >
 <Nav />
-	<main class="container mx-auto px-4 py-8 space-y-12"
+	<main class="container mx-auto px-4 py-8 space-y-12">
 		<!-- Flipbook Overlay -->
 		<div id="flipbook-overlay" class="fixed inset-0 z-50 bg-white dark:bg-[#404040] flex items-center justify-center">
 			<div class="w-full max-w-4xl h-[400px]">
@@ -54,7 +54,6 @@ const seoData = {
 				}
 			}, 1500); // flipbook duration
 		</script>
-		<h1>About us</h1>
 		<section id="approach" class="py-12">
 			<h2 class="text-3xl font-bold mb-8">Our Approach</h2>
 			<TabSection client:load tabs={[
