@@ -9,18 +9,48 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [dinoLoaded, setDinoLoaded] = useState(false);
+  const [chatVisible, setChatVisible] = useState(false);
+  const [textVisible, setTextVisible] = useState(false);
   
   console.log('Tabs data:', tabs);
   console.log('Active tab image:', tabs[activeTab]?.image);
+
+  // Trigger dinosaur animation when tab changes
+  useEffect(() => {
+    // Hide dinosaur and chat bubble
+    setDinoLoaded(false);
+    setChatVisible(false);
+    
+    // Start dinosaur animation after a short delay
+    const dinoTimer = setTimeout(() => setDinoLoaded(true), 100);
+    
+    // Start chat bubble container animation after dinosaur shake completes
+    const chatTimer = setTimeout(() => setChatVisible(true), 700);
+    
+    // Start text animation after chat bubble container is visible
+    const textTimer = setTimeout(() => setTextVisible(true), 1200);
+    
+    return () => {
+      clearTimeout(dinoTimer);
+      clearTimeout(chatTimer);
+      clearTimeout(textTimer);
+    };
+  }, [activeTab]);
 
   const handleTabClick = (index: number) => {
     if (index === activeTab) return;
     
     setIsAnimating(true);
+    
+    // First fade out text
+    setTextVisible(false);
+    
+    // Wait for text to fade out, then change content
     setTimeout(() => {
       setActiveTab(index);
       setTimeout(() => setIsAnimating(false), 100);
-    }, 150);
+    }, 300);
   };
 
   const handleAccordionClick = (index: number) => {
@@ -29,6 +59,21 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
 
   return (
     <div className="w-full">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes dinoShake {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-8px) rotate(-1deg); }
+            50% { transform: translateX(8px) rotate(1deg); }
+            75% { transform: translateX(-4px) rotate(-0.5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+          }
+          .dino-shake {
+            animation: dinoShake 0.6s ease-in-out;
+          }
+        `
+      }} />
+
       {/* Desktop Tabs */}
       <div className="hidden lg:block">
         <div className="flex">
@@ -53,21 +98,29 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
                 <img
                   src={tabs[activeTab].image}
                   alt={tabs[activeTab].title}
-                  className="w-full"
+                  className={`w-full transition-all duration-300 ease-out ${
+                    dinoLoaded ? 'dino-shake' : 'opacity-0'
+                  }`}
                 />
               </div>
-              <div className={`w-2/3 mt-[8rem] relative bg-white border-2 border-primary rounded-lg p-8 transition-all duration-300 origin-left flex-shrink-0 ${
-                isAnimating ? 'opacity-0 transform translate-y-4 scale-95 rotate-2' : 'opacity-100 transform translate-y-0 scale-100 rotate-0'
+              <div className={`w-2/3 mt-[8rem] relative bg-white border-2 border-primary rounded-lg p-8 transition-all duration-500 ease-out origin-left flex-shrink-0 ${
+                chatVisible 
+                  ? 'opacity-100 transform translate-y-0 scale-100 rotate-0' 
+                  : 'opacity-0 transform translate-y-4 scale-95 rotate-2'
               }`}>
                 {/* Chat bubble pointer */}
                 <div className="absolute top-4 -left-3 w-6 h-6 bg-white border-l-2 border-t-2 border-primary transform rotate-[-45deg]"></div>
-                <h3 className={`text-2xl font-bold mb-4 transition-all duration-300 text-gray ${
-                  isAnimating ? 'opacity-0 transform translate-y-4 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
+                <h3 className={`text-2xl text-gray font-bold mb-4 transition-all duration-500 ease-out ${
+                  textVisible 
+                    ? 'opacity-100 transform translate-y-0 scale-100' 
+                    : 'opacity-0 transform translate-y-4 scale-95'
                 }`}>
                   {tabs[activeTab].title}
                 </h3>
-                <p className={`text-gray transition-all duration-300 delay-75 ${
-                  isAnimating ? 'opacity-0 transform translate-y-4 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
+                <p className={`text-gray transition-all duration-500 ease-out delay-200 ${
+                  textVisible 
+                    ? 'opacity-100 transform translate-y-0 scale-100' 
+                    : 'opacity-0 transform translate-y-4 scale-95'
                 }`}>
                   {tabs[activeTab].content}
                 </p>
