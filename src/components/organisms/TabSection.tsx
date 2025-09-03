@@ -56,17 +56,17 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
                   className="w-full"
                 />
               </div>
-              <div className={`w-2/3 mt-[8rem] relative bg-white border-2 border-primary rounded-lg p-8 transition-all duration-300 origin-left flex-shrink-0 ${
+              <div className={`w-2/3 mt-[8rem] relative bg-white dark:bg-gray-800 border-2 border-primary rounded-lg p-8 transition-all duration-300 origin-left flex-shrink-0 ${
                 isAnimating ? 'opacity-0 transform translate-y-4 scale-95 rotate-2' : 'opacity-100 transform translate-y-0 scale-100 rotate-0'
               }`}>
                 {/* Chat bubble pointer */}
-                <div className="absolute top-4 -left-3 w-6 h-6 bg-white border-l-2 border-t-2 border-primary transform rotate-[-45deg]"></div>
-                <h3 className={`text-2xl font-bold mb-4 transition-all duration-300 ${
+                <div className="absolute top-4 -left-3 w-6 h-6 bg-white dark:bg-gray-800 border-l-2 border-t-2 border-primary transform rotate-[-45deg]"></div>
+                <h3 className={`text-2xl font-bold mb-4 transition-all duration-300 text-gray-900 dark:text-white ${
                   isAnimating ? 'opacity-0 transform translate-y-4 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}>
                   {tabs[activeTab].title}
                 </h3>
-                <p className={`text-gray-700 transition-all duration-300 delay-75 ${
+                <p className={`text-gray-700 dark:text-gray-200 transition-all duration-300 delay-75 ${
                   isAnimating ? 'opacity-0 transform translate-y-4 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}>
                   {tabs[activeTab].content}
