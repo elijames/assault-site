@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import FlipbookAnimation from '../components/organisms/FlipbookAnimation.astro';
 import Nav from '../components/organisms/Nav.astro';
 import { TabSection } from '../components/organisms/TabSection';
+import fortuneCookiesBg from '../assets/images/fortunecookies-min.png';
 
 // SEO metadata for the homepage
 const seoData = {
@@ -55,7 +56,7 @@ const seoData = {
 			}, 1500); // flipbook duration
 		</script>
 		<section class="relative py-10">
-			<div class="absolute inset-0" style="background-image: url('/src/assets/images/fortunecookies-min.png'); background-size: 400px 400px; background-repeat: repeat; opacity: 0.5; background-position: center;"></div>
+			<div class="absolute inset-0" style={`background-image: url(${fortuneCookiesBg}); background-size: 400px 400px; background-repeat: repeat; opacity: 0.5; background-position: center;`}></div>
 			<div class="container mx-auto px-4 py-8 space-y-12 relative z-10 flex justify-center items-center">
 				<h1>Turn Customers into Fanatics.</h1>
 			</div>
@@ -86,7 +87,7 @@ const seoData = {
 			</div>
 		</section>
 		<section id="work-with-us" class="relative py-10">
-			<div class="absolute inset-0" style="background-image: url('/src/assets/images/fortunecookies-min.png'); background-size: 400px 400px; background-repeat: repeat; opacity: 0.5; background-position: top;"></div>
+			<div class="absolute inset-0" style={`background-image: url(${fortuneCookiesBg}); background-size: 400px 400px; background-repeat: repeat; opacity: 0.5; background-position: top;`}></div>
 			<div class="container relative mx-auto px-10 py-8 space-y-12 flex flex-col justify-center">
 				<div class="px-4 lg:px-8 pb-6 flex flex-col justify-center items-center">
 					<h2 class="pb-4 text-center">Ready to ignite a cult following and turn your customers into fanatics? </h2>
