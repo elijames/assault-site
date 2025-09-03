@@ -161,11 +161,6 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
               }`}
             >
               <div className="pb-4">
-                <img
-                  src={tab.image}
-                  alt={tab.title}
-                  className="w-full mb-4"
-                />
                 <p className="text-gray-700">{tab.content}</p>
               </div>
             </div>
