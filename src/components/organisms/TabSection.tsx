@@ -103,7 +103,7 @@ export const TabSection: React.FC<TabSectionProps> = ({ tabs }) => {
                   }`}
                 />
               </div>
-              <div className={`w-2/3 mt-[8rem] relative bg-white border-2 border-primary rounded-lg p-8 transition-all duration-500 ease-out origin-left flex-shrink-0 ${
+              <div className={`w-2/3 lg:mt-[6rem] xl:mt-[8rem] 2xl:mt-[10rem] relative bg-white border-2 border-primary rounded-lg p-8 transition-all duration-500 ease-out origin-left flex-shrink-0 ${
                 chatVisible 
                   ? 'opacity-100 transform translate-y-0 scale-100 rotate-0' 
                   : 'opacity-0 transform translate-y-4 scale-95 rotate-2'
